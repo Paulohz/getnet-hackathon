@@ -1,24 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Input from '../../Components/Input';
 
 import { Container, Content } from './styles';
 
-
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
     return (
         <Container>
 
             <Content>
                 <h1>Faça seu login</h1>
 
+                <Input name="Nome completo" />
                 <Input name="Email" />
                 <Input name="Senha" />
-
+                <Input name="CPF" />
+                <Input name="Telefone" />
+                <Input name="Endereço" />
 
                 <button>Entrar</button>
 
-                <Link to="/signup">Não tem uma conta? Registre-se</Link>
+                <span>Sou empresario</span>
 
             </Content>
 
@@ -27,4 +28,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default SignUp;
