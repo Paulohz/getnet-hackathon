@@ -18,8 +18,18 @@ const Map: React.FC<IMap> = ({ mapType, mapTypeControl = false}) => {
         if (!map) {
             defaultMapStart();
         }
+
+
     };
+
+
     useEffect(startMap, [map]);
+
+    new google.maps.Marker({
+        position: new google.maps.LatLng(-23.5585667,-46.4123039),
+        map,
+        title: "Hello World!",
+    });
 
     const defaultMapStart = (): void => {
         const defaultAddress = new google.maps.LatLng(-23.5585667,-46.4123039);
@@ -42,11 +52,17 @@ const Map: React.FC<IMap> = ({ mapType, mapTypeControl = false}) => {
                     gestureHandling: 'cooperative',
                     mapTypeId: mapType,
                     draggableCursor: 'pointer',
-                })
+                }
+                
+                
+                )
             );
+
+
         }
     };
 
+    
     return (
         <div className="map-container">
             <div ref={ref} className="map-container__map"></div>

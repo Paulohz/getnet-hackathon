@@ -5,6 +5,7 @@ import Map from '../../Components/Map'
 
 import { Container } from './styles';
 import { loadMapApi } from "../../utils/GoogleMapsUtils";
+import Header from '../../Components/Header';
 
 const Home: React.FC = () => {
     const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -18,13 +19,10 @@ const Home: React.FC = () => {
 
     return (
         <>
+        <Header />
             <Container>
                 <span><FiFilter size={20} /></span>
                 <input type="text" placeholder="Digite para pesquisar" />
-
-
-
-
             </Container>
 
             <div className="App">
