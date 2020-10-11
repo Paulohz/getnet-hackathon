@@ -19,7 +19,7 @@ export async function up(knex: Knex){
             .onUpdate('CASCADE');
 
         table.string('paymentForm').notNullable();
-        table.string('finalPrice').notNullable();    
+        table.decimal('finalPrice').notNullable();    
 
         table.timestamp('created_at')
             .defaultTo(knex.raw('CURRENT_TIMESTAMP'))

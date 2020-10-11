@@ -8,8 +8,8 @@ export async function up(knex: Knex){
         table.string('cnpj').notNullable();
         table.string('adress').notNullable();
         table.string('number').notNullable();
-        table.string('longitude').notNullable();
-        table.string('latitude').notNullable();
+        table.decimal('longitude').notNullable();
+        table.decimal('latitude').notNullable();
         table.string('telephone').notNullable();
         table.string('password').notNullable();
         table.string('avatar');

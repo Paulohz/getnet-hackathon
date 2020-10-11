@@ -19,11 +19,7 @@ export async function up(knex: Knex){
             .onUpdate('CASCADE');
 
         table.string('dayPrice').notNullable();
-        table.string('quantity').notNullable();
-
-        table.timestamp('created_at')
-            .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
-            .notNullable();
+        table.integer('quantity').notNullable();
     })
 }
 

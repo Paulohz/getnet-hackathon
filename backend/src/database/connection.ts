@@ -1,4 +1,5 @@
 import Knex from 'Knex';
+import knexPostgis from 'knex-postgis';
 import path from 'path';
 
 const db = Knex({

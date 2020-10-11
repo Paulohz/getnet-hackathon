@@ -9,6 +9,7 @@ export default class CustomersController {
             telephone,
             cpf,
             adress,
+            number,
             email,
             password,
             avatar
@@ -22,6 +23,7 @@ export default class CustomersController {
                 telephone,
                 cpf,
                 adress,
+                number,
                 email,
                 password,
                 avatar

@@ -8,10 +8,17 @@ export default class CompaniesController {
 
         const name = filters.name as string;
 
-        const searchedCompanies = await db('companies').select('id','name','email','cnpj','adress','number','longitude','latitude','telephone','avatar').where('name', 'like', `%${name}%`)
-        
+        const searchedCompanies = await db('companies').select('id','name','email','cnpj','adress','number','latitude','longitude','telephone','avatar').where('name', 'like', `%${name}%`)
         
         return response.json(searchedCompanies);
+    }
+
+    async IndexById(request:Request, response:Response){
+        const {companyId} = request.params;
+
+        const searchedCompany = await db('companies').select('id','name','email','cnpj','adress','number','latitude','longitude','telephone','avatar').where('id', companyId)
+
+        return response.json(searchedCompany)
     }
 
 
@@ -22,8 +29,8 @@ export default class CompaniesController {
             cnpj,
             adress,
             number,
-            longitude,
             latitude,
+            longitude,
             telephone,
             password,
             avatar
@@ -38,8 +45,8 @@ export default class CompaniesController {
                 cnpj,
                 adress,
                 number,
-                longitude,
                 latitude,
+                longitude,
                 telephone,
                 password,
                 avatar
@@ -49,6 +56,7 @@ export default class CompaniesController {
         
             return response.status(201).send();
         } catch(err){
+            console.log(err)
             trx.rollback();
     
             return response.status(400).json({

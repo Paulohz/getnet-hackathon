@@ -6,7 +6,7 @@ export async function up(knex: Knex){
         table.string('name').notNullable();
         table.string('description').notNullable();
         table.string('photo').notNullable();
-        table.string('price').notNullable();
+        table.decimal('price').notNullable();
         
         table.integer('company_id')
             .notNullable()
