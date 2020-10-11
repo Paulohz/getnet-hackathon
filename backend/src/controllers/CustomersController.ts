@@ -3,13 +3,28 @@ import {Request, Response} from 'express'
 import db from '../database/connection';
 
 export default class CustomersController {
+    async IndexById(request:Request, response:Response){
+        const {customerId} = request.params;
+
+        const searchedCustomer = await db('customers').select('id','first_name','last_name','telephone','cpf','adress','number','complementary','neighborhood','city', 'state', 'zipcode', 'country', 'email').where('id', customerId)
+
+        return response.json(searchedCustomer)
+    }
+
     async create(request: Request, response:Response) {
         const {
-            name,
+            first_name,
+            last_name,
             telephone,
             cpf,
             adress,
             number,
+            complementary,
+            neighborhood,
+            city,
+            state,
+            zipcode,
+            country,
             email,
             password,
             avatar
@@ -19,11 +34,18 @@ export default class CustomersController {
     
         try {
             const insertedCustomersIds = await trx('customers').insert({
-                name,
+                first_name,
+                last_name,
                 telephone,
                 cpf,
                 adress,
                 number,
+                complementary,
+                neighborhood,
+                city,
+                state,
+                zipcode,
+                country,
                 email,
                 password,
                 avatar
@@ -35,6 +57,7 @@ export default class CustomersController {
         
             return response.status(201).send();
         } catch(err){
+            console.log(err)
             trx.rollback();
     
             return response.status(400).json({

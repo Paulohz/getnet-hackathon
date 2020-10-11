@@ -18,7 +18,7 @@ export async function up(knex: Knex){
             .onDelete('CASCADE')
             .onUpdate('CASCADE');
 
-        table.string('dayPrice').notNullable();
+        table.string('value').notNullable();
         table.integer('quantity').notNullable();
     })
 }

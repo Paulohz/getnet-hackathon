@@ -16,7 +16,7 @@ interface ProdutoCompleto{
 }
 
 export default class ProductsController {
-    async index(request:Request, response:Response){
+    async indexByCompany(request:Request, response:Response){
         const filters = request.query;
 
         const companyId = filters.companyId as string;
@@ -35,7 +35,7 @@ export default class ProductsController {
             const finalArray = await Promise.all(searchedCategories.map(async category => {
                 const products = await db('categories')
                     .join('products', 'categories.id', '=', 'products.category_id')
-                    .select('products.id', 'products.name', 'products.description')
+                    .select('products.*')
                     .where('categories.id', category.id)
                     .where('products.company_id',companyId);
     
@@ -51,8 +51,8 @@ export default class ProductsController {
         const filters = request.query;
 
         const name = filters.name as string;
-        const userLatitude = filters.userLatitude as unknown as number;;
-        const userLongitude = filters.userLongitude as unknown as number;;
+        const userLatitude = filters.userLatitude as unknown as number;
+        const userLongitude = filters.userLongitude as unknown as number;
         const radius = filters.radius as unknown as number;
 
         const searchedProduct = await db('products')
@@ -71,11 +71,11 @@ export default class ProductsController {
                 latitude: product.latitude,
                 longitude: product.longitude
             }
-            console.log(getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude ))
+            product.distance = getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude)
+            console.log(getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude))
             return getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude ) <= radius
         })
-        //Codar solução para buscar produtos dentro do raio de distancia enviado pela requisição
-        //Em ../utils existe uma função que calcula distancias baseando-se na distancias do usuário e da empresa
+
         return response.json(productsInRegion);
     }
 
