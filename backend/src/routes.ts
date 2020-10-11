@@ -1,20 +1,26 @@
 import express from 'express';
 import {Request, Response} from 'express'
+
 import AuthenticationController from './controllers/AuthenticationController';
 import CategoriesController from './controllers/CategoriesController';
-
 import CompaniesController from './controllers/CompaniesController';
 import CustomersController from './controllers/CustomersController';
+import LoginController from './controllers/LoginController';
 import ProductsController from './controllers/ProductsController';
 import SalesController from './controllers/SalesController';
 
 const routes = express.Router();
+
 const companiesController = new CompaniesController(); 
 const customersController = new CustomersController();
 const productsController = new ProductsController();
 const salesController = new SalesController();
 const categoriesController = new CategoriesController();
 const authenticationController = new AuthenticationController();
+const loginController = new LoginController();
+
+routes.post('/loginCustomer', loginController.loginCustomer)
+routes.post('/loginCompany', loginController.loginCompany)
 
 routes.get('/companies/create', companiesController.create) //Validado
 routes.get('/companies/indexByLikeName', companiesController.indexByLikeName) //Validado

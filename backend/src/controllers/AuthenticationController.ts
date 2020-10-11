@@ -27,7 +27,7 @@ export default class AuthenticationController {
             headers: {
                 "Accept": "application/json, text/plain, */*",
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Authorization": "Basic " + "NGYyYjdlMDAtYWYxMS00ZTVjLTlkOTEtMjFjM2ViOTA5NGRjOjFlNWRjMTFlLTUzNzUtNDE3OS1iMjA1LWNhYzUyMDU3ODMyNQ=="
+                "Authorization": "Basic " + key
             }                              
         }).then(res => {
             return response.json(res.data)
