@@ -12,6 +12,8 @@
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como Baixar o Projeto](#-como-baixar-o-projeto)
 
+---
+
 ## 📜 Sobre 
 
 O projeto do **Digitalizze** foi desenvolvido durante o **Hackathon da GetNet**. A **Digitalizze** é uma plataforma de busca e venda de produtos e serviços com a missão de unir o cliente ao Microempreendedor, fazendo com que o  Microempreendedor consiga ter uma presença digital dando uma maior visibilidade e deixando o seu cliente informado sobre seus produtos/serviços possibilitando uma maior rede de clientes.
