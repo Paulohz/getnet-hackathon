@@ -12,10 +12,17 @@ export default class CategoriesController {
     }
 
     async create(request: Request, response:Response) {
-        const {
+       const filters = request.query;
+       
+       //trocar para const depois
+        var {
             name,
             company_id
         } = request.body;
+
+        if(filters.userid){
+            company_id = filters.userid
+        }
     
         const trx = await db.transaction();
     

@@ -9,6 +9,8 @@ import LoginController from './controllers/LoginController';
 import ProductsController from './controllers/ProductsController';
 import SalesController from './controllers/SalesController';
 
+import verifyJWT from './utils/verifyJWT'
+
 const routes = express.Router();
 
 const companiesController = new CompaniesController(); 
@@ -19,27 +21,30 @@ const categoriesController = new CategoriesController();
 const authenticationController = new AuthenticationController();
 const loginController = new LoginController();
 
-routes.post('/loginCustomer', loginController.loginCustomer)
-routes.post('/loginCompany', loginController.loginCompany)
+//Retirar verifyJWT para testar sem precisar passar token 
+
+routes.post('/loginCustomer', loginController.loginCustomer) //Validado
+routes.post('/loginCompany', loginController.loginCompany) //Validado
+routes.post('/logout', loginController.logout) //Validado
 
 routes.get('/companies/create', companiesController.create) //Validado
-routes.get('/companies/indexByLikeName', companiesController.indexByLikeName) //Validado
-routes.get('/companies/index/:companyId', companiesController.IndexById) //Validado
+routes.get('/companies/indexByLikeName', verifyJWT, companiesController.indexByLikeName) //Validado
+routes.get('/companies/index/:companyId', verifyJWT, companiesController.IndexById) //Validado
 
 routes.post('/customers/create', customersController.create) //Validado
-routes.get('/customers/IndexById/:customerId', customersController.IndexById) //Validado
+routes.get('/customers/IndexById/:customerId', verifyJWT, customersController.IndexById) //Validado
 
-routes.post('/categories/create', categoriesController.create) //Validado
-routes.get('/categories/indexByCompany/:companyId', categoriesController.indexByCompanyId) //Validado
+routes.post('/categories/create', verifyJWT, categoriesController.create) //Validado
+routes.get('/categories/indexByCompany/:companyId', verifyJWT, categoriesController.indexByCompanyId) //Validado
 
-routes.post('/products/create', productsController.create)//Validado
-routes.get('/products/indexByCompany', productsController.indexByCompany)//Validado
-routes.get('/products/indexByName', productsController.indexByLikeName)//Validado
+routes.post('/products/create', verifyJWT, productsController.create)//Validado
+routes.get('/products/indexByCompany/:companyId', verifyJWT, productsController.indexByCompany)//Validado
+routes.get('/products/indexByName', verifyJWT, productsController.indexByLikeName)//Validado
 
-routes.get('/sales/create', salesController.create) //Validado
-routes.get('/sales/indexByCompany/:companyId', salesController.indexByCompany) //Validado
-routes.get('/sales/indexByCustomer/:customerId', salesController.indexByCustomer) //Validado
-routes.get('/sales/indexByCompanyByMonth', salesController.indexByCompanyByMonth) //Validado
-routes.get('/sales/authenticationGetNet', authenticationController.authToken)//Validado
+routes.post('/sales/create', verifyJWT, salesController.create) //Validado
+routes.get('/sales/indexByCompany/:companyId', verifyJWT, salesController.indexByCompany) //Validado
+routes.get('/sales/indexByCustomer/:customerId', verifyJWT, salesController.indexByCustomer) //Validado
+routes.get('/sales/indexByCompanyByMonth', verifyJWT, salesController.indexByCompanyByMonth) //Validado
+routes.get('/sales/authenticationGetNet', verifyJWT, authenticationController.authToken)//Validado
 
 export default routes;

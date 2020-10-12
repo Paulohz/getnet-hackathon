@@ -13,14 +13,11 @@ export default class LoginController{
                     .where('email', email)
                     .where('password', password)
 
-                    console.log(user)
-                    console.log(process.env.SECRET)
         if(user[0].count !== 0){
             const id = user[0].id
-        
-
+    
             var token = jwt.sign({ id }, process.env.SECRET, {
-                expiresIn: 1800 //Expires in 30 minutes
+                expiresIn: 18000 //Expires in 5 hours
             });
 
             return response.json({ auth: true, token: token });
@@ -34,6 +31,31 @@ export default class LoginController{
     async loginCustomer(request: Request, response: Response){
         const {email, password} = request.body;
 
-        const user = db('')
+        const user = await db('customers')
+                    .count('id as count')
+                    .select('id')
+                    .where('email', email)
+                    .where('password', password)
+
+        if(user[0].count !== 0){
+            const id = user[0].id
+    
+            var token = jwt.sign({ id }, process.env.SECRET, {
+                expiresIn: 7200 //Expires in 2 hours
+            });
+
+            return response.json({ auth: true, token: token });
+        } else {
+            response.status(500).json({
+                message: "Login Inválido!"
+            });
+        }
+    }
+
+    async logout(request: Request, response: Response){
+        response.json({
+            auth: false,
+            token: null
+        })
     }
 }

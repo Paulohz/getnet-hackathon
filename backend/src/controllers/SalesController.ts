@@ -41,8 +41,6 @@ export default class SalesController {
             .distinct()
             .select('*')
             .where('sales.company_id',companyId)
-        
-            console.log(searchedSales)
 
         const a = await returnJson()
 
@@ -78,8 +76,6 @@ export default class SalesController {
             .where('sales.company_id',companyId)
             .where('sales.created_at', '>=', `${initialDate} 00:00:00`)
             .where('sales.created_at', '<', `${finalDate} 00:00:00`)
-        
-            console.log(searchedSales)
 
         const a = await returnJson()
 
@@ -111,8 +107,6 @@ export default class SalesController {
             .distinct()
             .select('*')
             .where('sales.customer_id',customerId)
-        
-            console.log(searchedSales)
 
         const a = await returnJson()
 
@@ -136,13 +130,21 @@ export default class SalesController {
     }
 
     async create(request: Request, response:Response) {
-        const {
+        const filters = request.query;
+
+        const x_access_token = request.headers['x-access-token']
+        
+        var {
             customer_id,
             company_id,
             paymentForm,
             finalPrice,
             products
         } = request.body;
+
+        if(filters.userid){
+            customer_id = filters.userid
+        }
 
         const trx = await db.transaction();
     
@@ -170,18 +172,27 @@ export default class SalesController {
 
         let token = ''
         
-        await axios.get('http://localhost:3333/sales/authenticationGetNet').then(res => {
+        await axios.get('http://localhost:3333/sales/authenticationGetNet', {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': x_access_token
+            }
+        }).then(res => {
             token = res.data.access_token
         })
 
         let customer: Customers = {}
 
-        await axios.get('http://localhost:3333/companies/index/'+customer_id).then(res => {
+        await axios.get('http://localhost:3333/companies/index/'+customer_id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': x_access_token
+            }
+        }).then(res => {
              customer = res.data[0]
         })
 
         const modifiedProducts = products.map((product: Products) => {
-            console.log(product)
             delete product.product_id;
             return product;
         })
@@ -214,7 +225,6 @@ export default class SalesController {
         
             return response.json(finalJson);
         } catch(err){
-            console.log(err)
             trx.rollback();
     
             return response.status(400).json({

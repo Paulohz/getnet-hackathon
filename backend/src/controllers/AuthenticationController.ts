@@ -18,7 +18,7 @@ export default class AuthenticationController {
         const formData = "scope=oob&grant_type=client_credentials"
 
         const key = process.env.API_CLIENT_ID
-        console.log(key)
+        
         try{
         await axios.post(url, querystring.stringify({
             scope: "oob",
@@ -33,7 +33,6 @@ export default class AuthenticationController {
             return response.json(res.data)
         })
     }catch(res){
-        console.log(res)
         return response.json(res)
     }
     }

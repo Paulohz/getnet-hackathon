@@ -19,7 +19,7 @@ export default class ProductsController {
     async indexByCompany(request:Request, response:Response){
         const filters = request.query;
 
-        const companyId = filters.companyId as string;
+        const {companyId} = request.params
 
         const searchedCategories = await db('categories')
             .distinct()
@@ -72,7 +72,7 @@ export default class ProductsController {
                 longitude: product.longitude
             }
             product.distance = getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude)
-            console.log(getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude))
+            
             return getDistanceFromLatLonInKm(userLatitude, userLongitude, product.latitude, product.longitude ) <= radius
         })
 
@@ -80,7 +80,11 @@ export default class ProductsController {
     }
 
     async create(request: Request, response:Response) {
-        const {
+        const filters = request.query;
+        //const company_id = filters.user_id;
+
+        //trocar para const depois
+        var {
             name,
             description,
             photo,
@@ -89,6 +93,10 @@ export default class ProductsController {
             category_id,
             availability
         } = request.body;
+
+        if(filters.userid){
+            company_id = filters.userid
+        }
     
         const trx = await db.transaction();
     
