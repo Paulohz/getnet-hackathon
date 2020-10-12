@@ -37,6 +37,16 @@ $ git clone https://github.com/Paulohz/getnet-hackathon
 # Entrar no diretório do backend
 $ cd backend
 
+# É necessário criar um arquivo .env na raiz do backend. 
+
+# Siga o formato do arquivo .env.example
+
+# API_CLIENT_ID é a concatenação de "ClientID:ClientSecret" convertidos para base64.
+
+# Client Id e client secret são obtidos através do cadastro no Sandbox da GetNet
+
+#Em SECRET colocar qualquer valor que servirá de segredo para o JWT
+
 # Instalar as dependências
 $ yarn 
 
@@ -61,6 +71,8 @@ $ yarn
 $ yarn start
 
 ```
+
+
 
 
 
