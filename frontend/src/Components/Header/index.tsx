@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
-import { Container, Dropdown, DropdownList } from './styles';
+import { Container, Dropdown } from './styles';
 
 
 const Header: React.FC = () => {
@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         <Container>
 
             <div>
-                <img src="https://site.getnet.com.br/wp-content/uploads/2018/04/btn_logotipo.png" />
+                <img src="https://site.getnet.com.br/wp-content/uploads/2018/04/btn_logotipo.png" alt="logo" />
             </div>
 
             <Dropdown>
@@ -16,9 +16,7 @@ const Header: React.FC = () => {
                     <FiUser size={20} />
                 </button>
                 <div>
-                    <a href="#">Minha Conta</a>
-                    <a href="#">Meus pedido</a>
-                    <a href="#">Sair</a>
+
                 </div>
             </Dropdown>
 

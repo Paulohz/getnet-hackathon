@@ -6,11 +6,11 @@ export const Container = styled.div`
     justify-content: center;
     flex-direction: column;
     text-align: start;
-   
+    
 
-    > span {
-        margin: 5px 0;
-    }
+
+        margin: 10px 0;
+    
 
     input {
         border-radius: 5px;
