@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Button from '../../Components/Button';
 import api from '../../services/api';
 
-import { Link, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 import { FiShoppingCart } from 'react-icons/fi'
 
@@ -57,6 +57,8 @@ const DisplayCompany: React.FC = () => {
 
                 category.products.map(product => {
                     product.quantity = 1;
+                    const valor = product.price as string;
+                    product.price = valor.replace("R$","")
                     console.log(product)
                     return product;
                 }
@@ -90,19 +92,22 @@ const DisplayCompany: React.FC = () => {
     }
 
     const handleSubmit = useCallback(
-        async (cars) => {
+        async () => {
             try {
-                await api.post('/customers/create', {
+                const ultimatePrice = cart.reduce((accum,obj) => accum + parseFloat(obj.price),0);
+                console.log(ultimatePrice);
+                await api.post('/sales/create', {
                     customer_id: 1,
                     company_id: 1,
                     paymentForm: 'Débito',
-                    finalPrice:  cart.reduce((accum,obj) => accum + parseFloat(obj.price),0),
+                    finalPrice:  ultimatePrice,
                     products: cart.map((product: CompanyProducts) => {
                         delete product.availability;
                         delete product.category_id;
                         delete product.company_id;
                         delete product.photo;
                         product.sku = "";
+
                     })
                     ,
                 });
@@ -116,7 +121,7 @@ const DisplayCompany: React.FC = () => {
 
             }
         },
-        [history],
+        [cart, history],
     );
 
 
@@ -130,7 +135,7 @@ const DisplayCompany: React.FC = () => {
                     <FiShoppingCart size={20} />
                     {quantity}
 
-                    <Button type="submit" onClick={() => handleSubmit(cart)} >Finalizar compra</Button>
+                    <Button type="submit" onClick={() => handleSubmit()} >Finalizar compra</Button>
                 </div>
 
                 {categories.map(category => (
