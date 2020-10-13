@@ -1,4 +1,4 @@
-# Indice 
+# ✔ Indice 
 
 - [Sobre](#-sobre)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
@@ -55,6 +55,12 @@ $ cd ../
 
 # Entrar no diretório do frontend
 $ cd frontend
+
+# É necessário criar um arquivo .env na raiz do frontend. 
+
+# Siga o formato do arquivo .env.example
+
+# Preencha REACT_APP_API_KEY com a sua key da API do Google Maps 
 
 # Instalar as dependências
 $ yarn 
