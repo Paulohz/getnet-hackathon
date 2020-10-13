@@ -6,9 +6,11 @@ import AuthenticationController from './AuthenticationController'
 
 interface Products {
     product_id?: number;
+    id?: number;
     name: string;
     description: string;
-    value: number;
+    value?: string;
+    price?: string;
     quantity: number
     sku: string;
 }
@@ -193,7 +195,11 @@ export default class SalesController {
         })
 
         const modifiedProducts = products.map((product: Products) => {
-            delete product.product_id;
+            product.value = product.price
+            const valor = product.value as string
+            product.value = valor.replace("R$","")
+            delete product.price;
+            delete product.id;
             return product;
         })
 
