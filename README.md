@@ -1,11 +1,3 @@
-<h1 align="center">
-    Imagem
-<h1>
-
-<h1 align="center">
-    Gif de uso 
-<h1>
-
 # Indice 
 
 - [Sobre](#-sobre)
