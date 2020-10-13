@@ -37,3 +37,10 @@ export const Marker = styled.div`
 }
 
   `
+
+  export const Map = styled.div`
+    display: flex;
+    align-items: center; 
+    height: 100vh;
+    flex-direction: column;
+  `

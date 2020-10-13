@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { Container, Dropdown } from './styles';
 
 
@@ -16,6 +17,7 @@ const Header: React.FC = () => {
                     <FiUser size={20} />
                 </button>
                 <div>
+                    <Link to={'/'}>Sair</Link>
 
                 </div>
             </Dropdown>

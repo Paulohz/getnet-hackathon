@@ -6,7 +6,7 @@ import { FiFilter } from 'react-icons/fi';
 import api from '../../services/api';
 
 
-import { Container, Marker } from './styles';
+import { Container, Marker, Map } from './styles';
 import Header from '../../Components/Header';
 import { Link } from 'react-router-dom';
 
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
 
 
 
-            <div style={{ height: '100vh', width: '100%' }}>
+            <Map>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: `${process.env.REACT_APP_API_KEY}` }}
                     defaultCenter={center}
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
                     ))}
 
                 </GoogleMapReact>
-            </div >
+            </Map >
         </>
     )
 };

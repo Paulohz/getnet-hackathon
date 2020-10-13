@@ -45,7 +45,7 @@ const SignUp: React.FC = () => {
 
                 await api.post('/customers/create', data);
 
-               //history.push('/');
+               history.push('/');
 
 
             } catch (err) {
